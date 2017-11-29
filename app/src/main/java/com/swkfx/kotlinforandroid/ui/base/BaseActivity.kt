@@ -1,6 +1,8 @@
-package com.swkfx.kotlin_for_android.ui.base
+package com.swkfx.kotlinforandroid.ui.base
 
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
@@ -18,4 +20,10 @@ open class BaseActivity : AppCompatActivity(), AnkoLogger {
         super.onCreate(savedInstanceState)
         info("onCreate")
     }
+
+    inline fun Context.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
+        Toast.makeText(this, message, duration).show()
+    }
+
+
 }

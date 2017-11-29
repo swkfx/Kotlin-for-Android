@@ -1,7 +1,8 @@
-package com.swkfx.kotlin_for_android.ui.base
+package com.swkfx.kotlinforandroid.ui.base
 
 import android.content.Context
 import android.support.v4.app.Fragment
+import org.jetbrains.anko.toast
 
 /**
  * <pre>
@@ -18,7 +19,9 @@ open class BaseFragment : Fragment() {
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         mContext = context
+        mContext?.toast("223213")
     }
+
 
 
 }
