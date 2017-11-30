@@ -1,4 +1,4 @@
-package com.swkfx.kotlinforandroid.data
+package com.swkfx.kotlinforandroid.domain.datasource
 
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
