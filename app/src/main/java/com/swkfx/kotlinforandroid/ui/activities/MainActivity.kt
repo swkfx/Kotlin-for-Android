@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.swkfx.kotlinforandroid.R
+import com.swkfx.kotlinforandroid.data.Request
 import com.swkfx.kotlinforandroid.ui.adapters.GirlAdapter
 import com.swkfx.kotlinforandroid.ui.base.BaseActivity
+import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.find
 import org.jetbrains.anko.toast
+import org.jetbrains.anko.uiThread
 
 class MainActivity : BaseActivity() {
 
@@ -19,7 +22,17 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         setUpList()
         //aboutExtensionMethod()
+        request()
+    }
 
+    private fun request() {
+        val url = "http://gank.io/api/data/Android/10/1"
+        doAsync {
+            Request(url).run()
+            uiThread {
+                toast("request performed ~ ~")
+            }
+        }
     }
 
     private fun setUpList() {
