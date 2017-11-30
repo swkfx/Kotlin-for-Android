@@ -12,7 +12,7 @@ import android.widget.TextView
  *      desc   :
  * </pre>
  */
-class GirlAdapter(private val items: List<String>) : RecyclerView.Adapter<GirlAdapter.ViewHolder>() {
+class GirlAdapter(private val items: List<com.swkfx.kotlinforandroid.domain.model.Girl>) : RecyclerView.Adapter<GirlAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GirlAdapter.ViewHolder {
@@ -20,7 +20,7 @@ class GirlAdapter(private val items: List<String>) : RecyclerView.Adapter<GirlAd
     }
 
     override fun onBindViewHolder(holder: GirlAdapter.ViewHolder, position: Int) {
-        holder.textView.text = items[position]
+        holder.textView.text = items[position].desc
     }
 
     override fun getItemCount(): Int = items.size
