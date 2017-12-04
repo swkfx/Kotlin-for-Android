@@ -24,11 +24,16 @@ import org.jetbrains.anko.find
  */
 class GirlAdapter(private val items: List<Girl>) : RecyclerView.Adapter<GirlAdapter.GirlViewHolder>() {
 
-    internal var itemClick: OnItemClickListener? = null
-        get() = field
-        set(value) {
-            field = value
-        }
+    private var itemClick: OnItemClickListener? = null
+
+    fun setItemClickListener(listener: OnItemClickListener) {
+        itemClick = listener
+    }
+//    private var itemClick: ((Girl, Int) -> Unit)? = null
+//
+//    fun setItemClickListener(itemClick: ((Girl, Int) -> Unit)) {
+//        this.itemClick = itemClick
+//    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GirlAdapter.GirlViewHolder {
@@ -45,7 +50,7 @@ class GirlAdapter(private val items: List<Girl>) : RecyclerView.Adapter<GirlAdap
     override fun getItemCount(): Int = items.size
 
 
-    class GirlViewHolder(itemView: View, private val itemClick: OnItemClickListener?) : RecyclerView.ViewHolder(itemView) {
+    class GirlViewHolder(itemView: View, private val itemClickListener: OnItemClickListener?) : RecyclerView.ViewHolder(itemView) {
         private val tvDesc: TextView
         private val image: ImageView
 
@@ -57,7 +62,7 @@ class GirlAdapter(private val items: List<Girl>) : RecyclerView.Adapter<GirlAdap
         fun bindGirl(girl: Girl, position: Int) {
             with(girl) {
                 tvDesc.text = desc
-                Picasso.with(itemView.context)
+                Picasso.with(itemView.ctx)
                         .load(url)
                         .into(image, object : Callback {
                             override fun onSuccess() {
@@ -69,10 +74,34 @@ class GirlAdapter(private val items: List<Girl>) : RecyclerView.Adapter<GirlAdap
                             }
 
                         })
-                itemView.setOnClickListener { itemClick?.invoke(girl, position) }
+                itemView.setOnClickListener { itemClickListener?.invoke(girl, position) }
+                //lambda 过程
+//                itemView.setOnClickListener(
+//                        object : View.OnClickListener {
+//                            override fun onClick(v: View?) {
+//                                //匿名内部类的方式设置接口回调
+//                                itemView.ctx.toast("匿名内部类的方式设置接口回调")
+//                            }
+//
+//                        })
+                //--lambda表达式通过参数的形式被定义在箭头的左边（被圆括号包围），然后在
+                // 箭头的右边返回结果值--
+//                itemView.setOnClickListener(View.OnClickListener { v: View? ->
+//                    itemView.ctx.toast("lambda 的设置方法")
+//                })
+
+//                itemView.setOnClickListener({
+//                    //再简化
+//                })
+//                itemView.setOnClickListener{
+//                    //最后
+//                }
+
             }
 
         }
+
+
     }
 
     interface OnItemClickListener {
