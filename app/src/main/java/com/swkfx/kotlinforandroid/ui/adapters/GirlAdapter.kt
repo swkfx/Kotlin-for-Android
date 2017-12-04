@@ -5,14 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.swkfx.kotlinforandroid.R
 import com.swkfx.kotlinforandroid.domain.model.Girl
 import com.swkfx.kotlinforandroid.extensions.ctx
-import org.jetbrains.anko.find
+import kotlinx.android.synthetic.main.item_girl_list.view.*
 
 /**
  * <pre>
@@ -51,17 +49,18 @@ class GirlAdapter(private val items: List<Girl>) : RecyclerView.Adapter<GirlAdap
 
 
     class GirlViewHolder(itemView: View, private val itemClickListener: OnItemClickListener?) : RecyclerView.ViewHolder(itemView) {
-        private val tvDesc: TextView
-        private val image: ImageView
-
-        init {
-            tvDesc = itemView.find(R.id.tvDesc)
-            image = itemView.find(R.id.imageView)
-        }
+//        private val tvDesc: TextView
+//        private val image: ImageView
+//
+//        init {
+//            tvDesc = itemView.find(R.id.tvDesc)
+//            image = itemView.find(R.id.imageView)
+//        }
 
         fun bindGirl(girl: Girl, position: Int) {
             with(girl) {
-                tvDesc.text = desc
+                itemView.tvDesc.text = desc
+                val image = itemView.imageView
                 Picasso.with(itemView.ctx)
                         .load(url)
                         .into(image, object : Callback {
@@ -74,7 +73,7 @@ class GirlAdapter(private val items: List<Girl>) : RecyclerView.Adapter<GirlAdap
                             }
 
                         })
-                itemView.setOnClickListener { itemClickListener?.invoke(girl, position) }
+                itemView.setOnClickListener { itemClickListener?.invoke(this, position) }
                 //lambda 过程
 //                itemView.setOnClickListener(
 //                        object : View.OnClickListener {
