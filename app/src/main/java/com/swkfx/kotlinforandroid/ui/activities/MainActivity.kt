@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.swkfx.kotlinforandroid.R
 import com.swkfx.kotlinforandroid.domain.commands.RequestGirlListCommand
+import com.swkfx.kotlinforandroid.domain.model.Girl
 import com.swkfx.kotlinforandroid.ui.adapters.GirlAdapter
 import com.swkfx.kotlinforandroid.ui.base.BaseActivity
 import org.jetbrains.anko.doAsync
@@ -32,7 +33,15 @@ class MainActivity : BaseActivity() {
             val girlListModel = RequestGirlListCommand(1).execute()
             uiThread {
                 if (!girlListModel.error) {
-                    girlList.adapter = GirlAdapter(girlListModel.girls)
+                    val girlAdapter = GirlAdapter(girlListModel.girls)
+                    girlAdapter.itemClick = object : GirlAdapter.OnItemClickListener {
+                        override fun invoke(girl: Girl, position: Int) {
+                            longToast("click position -> " + position)
+                        }
+
+
+                    }
+                    girlList.adapter = girlAdapter
                 } else {
                     longToast("request girl list fail")
                 }

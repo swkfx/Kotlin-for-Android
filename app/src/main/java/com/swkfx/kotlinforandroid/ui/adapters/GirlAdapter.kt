@@ -11,6 +11,7 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.swkfx.kotlinforandroid.R
 import com.swkfx.kotlinforandroid.domain.model.Girl
+import com.swkfx.kotlinforandroid.extensions.ctx
 import org.jetbrains.anko.find
 
 /**
@@ -23,29 +24,37 @@ import org.jetbrains.anko.find
  */
 class GirlAdapter(private val items: List<Girl>) : RecyclerView.Adapter<GirlAdapter.GirlViewHolder>() {
 
+    internal var itemClick: OnItemClickListener? = null
+        get() = field
+        set(value) {
+            field = value
+        }
 
-    init {
-
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GirlAdapter.GirlViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
+        val inflater = LayoutInflater.from(parent.ctx)
+//        val inflater = LayoutInflater.from(parent.context)
         val itemView = inflater.inflate(R.layout.item_girl_list, parent, false)
-        return GirlViewHolder(itemView)
+        return GirlViewHolder(itemView, itemClick)
     }
 
     override fun onBindViewHolder(holder: GirlAdapter.GirlViewHolder, position: Int) {
-        holder.bindView(items[position])
+        holder.bindGirl(items[position], position)
     }
 
     override fun getItemCount(): Int = items.size
 
 
-    class GirlViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val tvDesc = itemView.find<TextView>(R.id.tvDesc)
-        private val image = itemView.find<ImageView>(R.id.imageView)
+    class GirlViewHolder(itemView: View, private val itemClick: OnItemClickListener?) : RecyclerView.ViewHolder(itemView) {
+        private val tvDesc: TextView
+        private val image: ImageView
 
-        fun bindView(girl: Girl) {
+        init {
+            tvDesc = itemView.find(R.id.tvDesc)
+            image = itemView.find(R.id.imageView)
+        }
+
+        fun bindGirl(girl: Girl, position: Int) {
             with(girl) {
                 tvDesc.text = desc
                 Picasso.with(itemView.context)
@@ -60,7 +69,14 @@ class GirlAdapter(private val items: List<Girl>) : RecyclerView.Adapter<GirlAdap
                             }
 
                         })
+                itemView.setOnClickListener { itemClick?.invoke(girl, position) }
             }
+
         }
+    }
+
+    interface OnItemClickListener {
+
+        operator fun invoke(girl: Girl, position: Int)
     }
 }
