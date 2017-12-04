@@ -15,7 +15,7 @@ import java.net.URLEncoder
  * </pre>
  */
 
-class GirlListRequest(val pageCount: Int) {
+class GirlListRequest(private val pageCount: Int) {
 
     companion object {
         private val TYPE = "福利"
@@ -30,8 +30,7 @@ class GirlListRequest(val pageCount: Int) {
         Log.d("GirlListRequest", url)
         val jsonStr = URL(url).readText()
         Log.d("GirlListRequest", jsonStr)
-        val result = Gson().fromJson(jsonStr, GirlListResult::class.java)
-        return result
+        return Gson().fromJson(jsonStr, GirlListResult::class.java)
     }
 
 }
