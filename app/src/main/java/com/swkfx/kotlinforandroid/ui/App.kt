@@ -1,8 +1,7 @@
 package com.swkfx.kotlinforandroid.ui
 
 import android.app.Application
-import android.content.Context
-import com.swkfx.kotlinforandroid.extensions.Singleton
+import com.swkfx.kotlinforandroid.extensions.DelegatesExt
 
 /**
  * <pre>
@@ -15,19 +14,13 @@ import com.swkfx.kotlinforandroid.extensions.Singleton
 class App : Application() {
 
 
-    val ctx: Context by lazy {
-        instance().applicationContext
-    }
-
     companion object {
-        private var instance: App? = null
-        fun instance() = instance!!
+        var instance: App by DelegatesExt.notNullSingleValue()
     }
 
     override fun onCreate() {
         super.onCreate()
         instance = this
 
-        Singleton.setUserName("testUserName")
     }
 }
