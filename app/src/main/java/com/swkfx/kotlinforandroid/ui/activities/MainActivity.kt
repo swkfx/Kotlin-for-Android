@@ -2,9 +2,12 @@ package com.swkfx.kotlinforandroid.ui.activities
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import com.swkfx.kotlinforandroid.R
 import com.swkfx.kotlinforandroid.domain.commands.RequestGirlListCommand
 import com.swkfx.kotlinforandroid.domain.model.Girl
+import com.swkfx.kotlinforandroid.extensions.Singleton
+import com.swkfx.kotlinforandroid.ui.App
 import com.swkfx.kotlinforandroid.ui.adapters.GirlAdapter
 import com.swkfx.kotlinforandroid.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -20,6 +23,17 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setUpList()
+
+        testAppContext()
+
+    }
+
+    private fun testAppContext() {
+        val packageName = App.instance().ctx.packageName
+        Log.d("TAG", packageName?.toString())
+        val userName = Singleton.getUserName()
+        Log.d("TAG", userName)
+
     }
 
 
