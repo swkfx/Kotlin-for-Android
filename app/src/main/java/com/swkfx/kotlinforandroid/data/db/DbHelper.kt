@@ -1,5 +1,6 @@
 package com.swkfx.kotlinforandroid.data.db
 
+import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import com.swkfx.kotlinforandroid.ui.App
 import org.jetbrains.anko.db.*
@@ -12,7 +13,7 @@ import org.jetbrains.anko.db.*
  *      desc   :
  * </pre>
  */
-class DbHelper() : ManagedSQLiteOpenHelper(App.instance, DB_NAME, null, DB_VERSION) {
+class DbHelper(ctx: Context = App.instance) : ManagedSQLiteOpenHelper(ctx, DB_NAME, null, DB_VERSION) {
 
     companion object {
         val DB_NAME: String = "girl.db"
