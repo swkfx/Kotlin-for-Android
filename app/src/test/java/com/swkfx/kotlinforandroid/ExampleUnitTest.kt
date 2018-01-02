@@ -20,7 +20,7 @@ class ExampleUnitTest {
         val list = listOf(3, 4, 5, 6, 7)
         val charList = listOf("a", "b", "c", "d")
         val listWithNull = listOf(null, "a", 6)
-
+        val unsortedList = listOf(5, 7, 3, 4, 6)
 
         //any 如果至少有一个元素符合给出的判断条件，则返回true。
         assertEquals(true, list.any { it % 2 == 0 })
@@ -170,7 +170,79 @@ class ExampleUnitTest {
         返回符合给定函数的单个元素，如果没有符合或者超过一个，则返回null。*/
         assertEquals(null, list.singleOrNull() { it % 8 == 0 })
 
+        /*生产操作符*/
 
+        //在1.0.2 版本后面弃用了
+        /*merge
+        把两个集合合并成一个新的，相同index的元素通过给定的函数进行合并成新的元素
+        作为新的集合的一个元素，返回这个新的集合。新的集合的大小由最小的那个集合
+        大小决定。*/
+
+        /*partition
+        把一个给定的集合分割成两个，第一个集合是由原集合每一项元素匹配给定函数条
+        件返回 true  的元素组成，第二个集合是由原集合每一项元素匹配给定函数条件返
+                回 false  的元素组成。*/
+        assertEquals(Pair(list.filter { it % 2 == 0 }, list.filter { it % 2 != 0 }),
+                list.partition { it % 2 == 0 }
+        )
+
+        /*plus
+        返回一个包含原集合和给定集合中所有元素的集合，因为函数的名字原因，我们可
+        以使用 +  操作符。*/
+        assertEquals(list.plus(8), list.plus(listOf(8)))
+        assertEquals(list.plus(8), list + listOf(8))
+        assertEquals(list.plus(list), list + list)
+
+        /*zip
+        返回由 pair  组成的List，每个 pair  由两个集合中相同index的元素组成。这个返
+        回的List的大小由最小的那个集合决定。*/
+        val zip = list.zip(list)
+        zip.forEach { println("zip test -> " + it) }
+        val pair = zip[0]
+        val i = pair.first + pair.second
+        assertEquals(6, i)
+        assertEquals(listOf(Pair(3, 8), Pair(4, 8)), list.zip(listOf(8, 8)))
+
+        /*upzip
+        * 与上面的相反
+        * */
+        val unzip = zip.unzip()
+        println("unzip test ->" + unzip)
+        assertEquals(list, unzip.first)
+        assertEquals(list, unzip.second)
+
+        /*顺序操作符
+        reverse 估计也是弃用了.换了api
+        返回一个与指定list相反顺序的list。*/
+        assertEquals(listOf(7, 6, 5, 4, 3), list.asReversed())
+
+        /*sort 估计也是弃用了.换了api
+        返回一个自然排序后的list。*/
+        assertEquals(list, unsortedList.sorted())
+
+        /*sortBy val unsortedList = listOf(5, 7, 3, 4, 6)
+        返回一个根据指定函数排序后的list。
+        猜测是根据 返回值  负数 0 整数 来判断
+        */
+        val sortedBy = unsortedList.sortedBy { it % 2 }
+        println("sortedBy src -> " + unsortedList)
+        println("sortedBy test -> " + sortedBy)
+        assertEquals(listOf(4, 6, 5, 7, 3), sortedBy)
+        /* 当返回是 int 会按 自然排序来一下.*/
+        assertEquals(listOf(3, 6, 7, 4, 5), unsortedList.sortedBy { it % 3 })
+        assertEquals(listOf(4, 5, 6, 7, 3), unsortedList.sortedBy { it % 4 })
+        /* 当返回 true false 时 会把 false 排在前面*/
+        assertEquals(listOf(5, 7, 3, 6, 4), unsortedList.sortedBy { it == 4 })
+        assertEquals(listOf(3, 4, 5, 7, 6), unsortedList.sortedBy { it > 4 })
+
+
+        /* sortDescending
+         返回一个降序排序后的List。
+         sortDescendingBy
+         返回一个根据指定函数降序排序后的list。*/
+        assertEquals(list.asReversed(), unsortedList.sortedDescending())
+        /* 依然是从左到右 根据返回值降序排列  */
+        assertEquals(listOf(5, 7, 4, 3, 6), unsortedList.sortedByDescending { it % 3 })
     }
 
 }
