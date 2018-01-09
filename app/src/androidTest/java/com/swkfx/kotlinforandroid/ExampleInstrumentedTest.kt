@@ -3,7 +3,7 @@ package com.swkfx.kotlin_for_android
 import android.content.Context
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
-import com.swkfx.kotlinforandroid.domain.datasource.Request
+import com.swkfx.kotlinforandroid.data.server.Request
 import org.jetbrains.anko.*
 import org.junit.Assert.assertEquals
 import org.junit.Test

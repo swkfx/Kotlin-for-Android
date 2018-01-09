@@ -17,6 +17,6 @@ data class Girl(val _id: String,
                 val source: String,
                 val type: String,
                 val url: String,
-                val used: Boolean,
+                val used: Long,
                 val who: String)
 

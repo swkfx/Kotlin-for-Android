@@ -9,12 +9,12 @@ package com.swkfx.kotlinforandroid.data.db
  * </pre>
  */
 object GirlsTable {
-    val NAME: String = "GirlTable"
+    val NAME: String = "tb_girl"
     val ID: String = "_id"
     val GIRL_ID : String = "girl_id"
-    val CREATEAT: String = "createAt"
+    val CREATE_AT: String = "createAt"
     val DESC: String = "desc"
-    val PUBLISHEDAT: String = "publishedAt"
+    val PUBLISHED_AT: String = "publishedAt"
     val SOURCE: String = "source"
     val TYPE: String = "type"
     val URL: String = "url"

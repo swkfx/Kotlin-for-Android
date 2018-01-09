@@ -1,7 +1,6 @@
 package com.swkfx.kotlinforandroid.domain.commands
 
-import com.swkfx.kotlinforandroid.domain.datasource.GirlListDataMapper
-import com.swkfx.kotlinforandroid.domain.datasource.GirlListRequest
+import com.swkfx.kotlinforandroid.domain.datasource.GirlsProvider
 import com.swkfx.kotlinforandroid.domain.model.GirlListModel
 
 /**
@@ -12,11 +11,7 @@ import com.swkfx.kotlinforandroid.domain.model.GirlListModel
  *      desc   :
  * </pre>
  */
-class RequestGirlListCommand(val pageCount: Int) : Command<GirlListModel> {
+class RequestGirlListCommand(private val pageNumber: Int, private val provider: GirlsProvider = GirlsProvider()) : Command<GirlListModel> {
 
-
-    override fun execute(): GirlListModel {
-        val rsp = GirlListRequest(pageCount).execute()
-        return GirlListDataMapper().convertFromDataModel(rsp)
-    }
+    override fun execute() = provider.requestGirls(pageNumber)
 }

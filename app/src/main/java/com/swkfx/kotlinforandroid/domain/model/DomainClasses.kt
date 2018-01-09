@@ -8,7 +8,12 @@ package com.swkfx.kotlinforandroid.domain.model
  *      desc   :
  * </pre>
  */
-data class GirlListModel(val error: Boolean, val girls: List<Girl>)
+data class GirlListModel(val error: Boolean, val girls: List<Girl>) {
+    fun size(): Int {
+        return girls.size
+    }
+}
+
 
 
 data class Girl(val _id: String,
@@ -18,5 +23,5 @@ data class Girl(val _id: String,
                 val source: String,
                 val type: String,
                 val url: String,
-                val used: Boolean,
+                val used: Long,
                 val who: String)

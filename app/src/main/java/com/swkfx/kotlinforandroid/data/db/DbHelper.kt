@@ -38,14 +38,15 @@ class DbHelper(ctx: Context = App.instance) : ManagedSQLiteOpenHelper(ctx, DB_NA
         db?.createTable(GirlsTable.NAME, true,
                 GirlsTable.ID to INTEGER + PRIMARY_KEY,
                 GirlsTable.GIRL_ID to TEXT + UNIQUE,
-                GirlsTable.CREATEAT to TEXT,
+                GirlsTable.CREATE_AT to TEXT,
                 GirlsTable.DESC to TEXT,
-                GirlsTable.PUBLISHEDAT to TEXT,
+                GirlsTable.PUBLISHED_AT to TEXT,
                 GirlsTable.SOURCE to TEXT,
                 GirlsTable.TYPE to TEXT,
                 GirlsTable.URL to TEXT,
                 GirlsTable.USED to INTEGER,
                 GirlsTable.WHO to TEXT)
     }
+
 }
 

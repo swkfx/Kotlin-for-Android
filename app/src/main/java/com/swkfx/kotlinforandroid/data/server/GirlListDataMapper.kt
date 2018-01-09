@@ -1,7 +1,5 @@
-package com.swkfx.kotlinforandroid.domain.datasource
+package com.swkfx.kotlinforandroid.data.server
 
-import com.swkfx.kotlinforandroid.data.server.Girl
-import com.swkfx.kotlinforandroid.data.server.GirlListResult
 import com.swkfx.kotlinforandroid.domain.model.GirlListModel
 import com.swkfx.kotlinforandroid.domain.model.Girl as GirlModel
 
@@ -14,7 +12,8 @@ import com.swkfx.kotlinforandroid.domain.model.Girl as GirlModel
  * </pre>
  */
 class GirlListDataMapper {
-    fun convertFromDataModel(girlListResult: GirlListResult): GirlListModel {
+
+    fun convertDataToModel(girlListResult: GirlListResult): GirlListModel {
         return if (!girlListResult.error) {
             GirlListModel(girlListResult.error, convertResultListToDomain(girlListResult.results))
         } else {
