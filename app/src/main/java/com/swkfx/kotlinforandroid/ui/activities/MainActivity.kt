@@ -34,7 +34,9 @@ class MainActivity : BaseActivity() {
             val girlListModel = RequestGirlListCommand(1).execute()
             uiThread {
                 if (!girlListModel.error) {
-                    val girlAdapter = GirlAdapter(girlListModel.girls)
+                    val girlAdapter = GirlAdapter(girlListModel.girls) { girl: Girl, positon: Int ->
+                        toast("girl._id${girl._id},pos$positon")
+                    }
 
                     //Lambdas
                     //简化
@@ -50,11 +52,12 @@ class MainActivity : BaseActivity() {
 //                    }
 
                     //最后采用Java的方式继续~~
-                    girlAdapter.setItemClickListener(object : GirlAdapter.OnItemClickListener {
-                        override fun invoke(girl: Girl, position: Int) {
-                            toast("click item position -> " + position)
-                        }
-                    })
+                    //                    girlAdapter.setItemClickListener(object : GirlAdapter.OnItemClickListener {
+                    //                        override fun invoke(girl: Girl, position: Int) {
+                    //                            toast("click item position -> " + position)
+                    //                        }
+                    //                    })
+
                     girlList.adapter = girlAdapter
                 } else {
                     longToast("request girl list fail")

@@ -32,6 +32,7 @@ class GirlListRequest(private val pageCount: Int) {
             Log.d("GirlListRequest", jsonStr)
             Gson().fromJson(jsonStr, GirlListResult::class.java)
         } catch (e: Exception) {
+            e.printStackTrace()
             GirlListResult(false, arrayListOf())
         }
     }

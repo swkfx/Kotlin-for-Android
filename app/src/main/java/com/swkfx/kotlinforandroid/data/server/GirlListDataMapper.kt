@@ -35,7 +35,7 @@ class GirlListDataMapper {
                 it.source,
                 it.type,
                 it.url,
-                it.used,
+                if (it.used) 0 else 1,
                 it.who)
     }
 }

@@ -20,13 +20,13 @@ import kotlinx.android.synthetic.main.item_girl_list.view.*
  *      desc   :
  * </pre>
  */
-class GirlAdapter(private val items: List<Girl>) : RecyclerView.Adapter<GirlAdapter.GirlViewHolder>() {
+class GirlAdapter(private val items: List<Girl>, private val itemClick: (Girl, Int) -> Unit) : RecyclerView.Adapter<GirlAdapter.GirlViewHolder>() {
 
-    private var itemClick: OnItemClickListener? = null
+    //    private var itemClick: OnItemClickListener? = null
 
-    fun setItemClickListener(listener: OnItemClickListener) {
-        itemClick = listener
-    }
+    //    fun setItemClickListener(listener: OnItemClickListener) {
+    //        itemClick = listener
+    //    }
 //    private var itemClick: ((Girl, Int) -> Unit)? = null
 //
 //    fun setItemClickListener(itemClick: ((Girl, Int) -> Unit)) {
@@ -48,7 +48,7 @@ class GirlAdapter(private val items: List<Girl>) : RecyclerView.Adapter<GirlAdap
     override fun getItemCount(): Int = items.size
 
 
-    class GirlViewHolder(itemView: View, private val itemClickListener: OnItemClickListener?) : RecyclerView.ViewHolder(itemView) {
+    class GirlViewHolder(itemView: View, val itemClickListener: (Girl, Int) -> Unit) : RecyclerView.ViewHolder(itemView) {
 //        private val tvDesc: TextView
 //        private val image: ImageView
 //

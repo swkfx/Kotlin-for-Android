@@ -26,6 +26,6 @@ class GirlsProvider(val sources: List<DataSource> = GirlsProvider.SOURCES) {
         if (requestGirls.size() > 0) requestGirls else null
     }
 
-    private fun <T : Any> requestToSources(girls: (DataSource) -> T?): T = sources.firstResult { girls(it) }
+    private fun <T : Any> requestToSources(source: (DataSource) -> T?): T = sources.firstResult { source(it) }
 }
 

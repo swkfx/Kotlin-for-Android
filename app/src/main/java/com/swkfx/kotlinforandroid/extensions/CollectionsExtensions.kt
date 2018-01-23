@@ -11,9 +11,9 @@ package com.swkfx.kotlinforandroid.extensions
 fun <K, V : Any> Map<K, V?>.toVarargArray(): Array<out Pair<K, V>> = map({ Pair(it.key, it.value!!) }).toTypedArray()
 
 
-fun <T, R> Iterable<T>.firstResult(girls: (T) -> R?): R {
+fun <T, R> Iterable<T>.firstResult(predicate: (T) -> R?): R {
     for (element in this) {
-        val result = girls(element)
+        val result = predicate(element)
         if (result != null) {
             return result
         }
