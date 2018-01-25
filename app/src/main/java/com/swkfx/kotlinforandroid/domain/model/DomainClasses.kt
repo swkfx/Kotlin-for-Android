@@ -8,12 +8,16 @@ package com.swkfx.kotlinforandroid.domain.model
  *      desc   :
  * </pre>
  */
-data class GirlListModel(val error: Boolean, val girls: List<Girl>) {
+data class GirlListModel(val error: Boolean,
+                         val girls: List<Girl>) {
     fun size(): Int {
         return girls.size
     }
 }
 
+data class GirlByDayModel(val error: Boolean = true,
+                          val category: List<String> = emptyList(),
+                          val girlMap: Map<String, List<Girl>> = emptyMap())
 
 
 data class Girl(val _id: String,

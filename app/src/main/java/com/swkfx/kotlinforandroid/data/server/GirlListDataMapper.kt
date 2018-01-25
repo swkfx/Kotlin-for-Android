@@ -1,5 +1,6 @@
 package com.swkfx.kotlinforandroid.data.server
 
+import com.swkfx.kotlinforandroid.domain.model.GirlByDayModel
 import com.swkfx.kotlinforandroid.domain.model.GirlListModel
 import com.swkfx.kotlinforandroid.domain.model.Girl as GirlModel
 
@@ -19,6 +20,19 @@ class GirlListDataMapper {
         } else {
             GirlListModel(true, emptyList())
         }
+    }
+
+    fun convertDayGirlToModel(girlByDay: GirlByDay): GirlByDayModel {
+        return if (!girlByDay.error) {
+            val girlMap = girlByDay.results
+            GirlByDayModel(girlByDay.error, girlByDay.category, convertGirlMapToModel(girlMap))
+        } else {
+            GirlByDayModel()
+        }
+    }
+
+    private fun convertGirlMapToModel(girlMap: Map<String, List<Girl>>): Map<String, List<GirlModel>> {
+        return girlMap.mapValues { convertResultListToDomain(it.value) }
     }
 
     private fun convertResultListToDomain(result: List<Girl>): List<GirlModel> {

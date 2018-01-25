@@ -23,6 +23,10 @@ class DbDataMapper {
 
     }
 
+    fun convertFromDomain(girlList: List<Girl>) = with(girlList) {
+        girlList.map { convertGirlFromDomain(it) }
+    }
+
     private fun convertGirlFromDomain(it: Girl) = with(it) {
         GirlDb(_id, createAt, desc, publishedAt, source, type, url, used, who)
     }

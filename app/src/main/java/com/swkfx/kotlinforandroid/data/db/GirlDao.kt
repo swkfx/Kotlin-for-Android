@@ -2,6 +2,7 @@ package com.swkfx.kotlinforandroid.data.db
 
 import com.swkfx.kotlinforandroid.data.server.GirlByDay
 import com.swkfx.kotlinforandroid.domain.datasource.DataSource
+import com.swkfx.kotlinforandroid.domain.model.GirlByDayModel
 import com.swkfx.kotlinforandroid.domain.model.GirlListModel
 import com.swkfx.kotlinforandroid.extensions.clear
 import com.swkfx.kotlinforandroid.extensions.parseList
@@ -19,8 +20,8 @@ import org.jetbrains.anko.db.select
  * </pre>
  */
 class GirlDao(private val dbHelper: DbHelper = DbHelper.instance, private val dbDataMapper: DbDataMapper = DbDataMapper()) : DataSource {
-    override fun requestGirlByDay(year: String, month: String, day: String): GirlByDay {
-        return GirlByDay(true, emptyList(), emptyMap())
+    override fun requestGirlByDay(year: String, month: String, day: String): GirlByDayModel {
+        return GirlByDayModel(true, emptyList(), emptyMap())
     }
 
     override fun requestGirls(pageNumber: Int): GirlListModel = requestGirlList(pageNumber)
@@ -58,5 +59,17 @@ class GirlDao(private val dbHelper: DbHelper = DbHelper.instance, private val db
         }
 
 
+    }
+
+    fun saveGirlByDay(dayGirl: GirlByDayModel) = dbHelper.use {
+        dayGirl.girlMap.values.forEach {
+            val receiver = dbDataMapper.convertFromDomain(it)
+            with(receiver) {
+                forEach {
+                    val insert = insert(GirlsTable.NAME, *it.map.toVarargArray())
+                    println("insert = $insert")
+                }
+            }
+        }
     }
 }
