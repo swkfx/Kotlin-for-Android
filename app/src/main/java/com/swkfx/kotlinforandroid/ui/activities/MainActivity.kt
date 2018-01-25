@@ -5,11 +5,13 @@ import android.support.v7.widget.LinearLayoutManager
 import com.swkfx.kotlinforandroid.R
 import com.swkfx.kotlinforandroid.domain.commands.RequestGirlListCommand
 import com.swkfx.kotlinforandroid.domain.model.Girl
+import com.swkfx.kotlinforandroid.extensions.formatDate
 import com.swkfx.kotlinforandroid.ui.adapters.GirlAdapter
 import com.swkfx.kotlinforandroid.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.longToast
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.uiThread
 
 class MainActivity : BaseActivity() {
@@ -35,7 +37,9 @@ class MainActivity : BaseActivity() {
             uiThread {
                 if (!girlListModel.error) {
                     val girlAdapter = GirlAdapter(girlListModel.girls) { girl: Girl, positon: Int ->
-                        toast("girl._id${girl._id},pos$positon")
+                        //                        toast("girl._id${girl._id},pos$positon")
+                        val publishedAt = girl.publishedAt
+                        startActivity<DetailActivity>(DetailActivity.KEY_DATE to publishedAt.formatDate())
                     }
 
                     //Lambdas
