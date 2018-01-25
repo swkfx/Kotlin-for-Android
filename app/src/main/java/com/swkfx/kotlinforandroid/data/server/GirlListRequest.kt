@@ -33,7 +33,7 @@ class GirlListRequest(private val pageCount: Int) {
             Gson().fromJson(jsonStr, GirlListResult::class.java)
         } catch (e: Exception) {
             e.printStackTrace()
-            GirlListResult(false, arrayListOf())
+            GirlListResult(true, arrayListOf())
         }
     }
 

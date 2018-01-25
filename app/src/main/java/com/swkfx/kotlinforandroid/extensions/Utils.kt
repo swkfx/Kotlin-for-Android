@@ -14,6 +14,6 @@ import java.util.*
  */
 fun String.formatDate(): Date {
     //    2015-08-06T04:16:55.575Z
-    val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.zzzZ", Locale.getDefault())
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S'Z'", Locale.getDefault())
     return dateFormat.parse(this)
 }

@@ -14,6 +14,10 @@ import com.swkfx.kotlinforandroid.domain.model.GirlListModel
  */
 class GirlsServer(val girlDao: GirlDao = GirlDao(), val dataMapper: GirlListDataMapper = GirlListDataMapper()) : DataSource {
 
+    override fun requestGirlByDay(year: String, month: String, day: String): GirlByDay {
+        return GirlByDayRequest(year, month, day).execute()
+    }
+
     override fun requestGirls(pageNumber: Int): GirlListModel {
         val result = GirlListRequest(pageNumber).execute()
         val girlListModel = dataMapper.convertDataToModel(result)
@@ -22,4 +26,6 @@ class GirlsServer(val girlDao: GirlDao = GirlDao(), val dataMapper: GirlListData
         }
         return girlListModel
     }
+
+
 }

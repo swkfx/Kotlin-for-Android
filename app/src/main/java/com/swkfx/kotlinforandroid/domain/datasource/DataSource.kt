@@ -1,5 +1,6 @@
 package com.swkfx.kotlinforandroid.domain.datasource
 
+import com.swkfx.kotlinforandroid.data.server.GirlByDay
 import com.swkfx.kotlinforandroid.domain.model.GirlListModel
 
 /**
@@ -12,4 +13,6 @@ import com.swkfx.kotlinforandroid.domain.model.GirlListModel
  */
 interface DataSource {
     fun requestGirls(pageNumber: Int): GirlListModel
+
+    fun requestGirlByDay(year: String, month: String, day: String): GirlByDay
 }

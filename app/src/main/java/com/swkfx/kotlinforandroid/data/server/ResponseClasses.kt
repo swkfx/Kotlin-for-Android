@@ -10,6 +10,8 @@ package com.swkfx.kotlinforandroid.data.server
  */
 data class GirlListResult(val error: Boolean, val results: List<Girl>)
 
+data class GirlByDay(val error: Boolean = true, val category: List<String> = emptyList(), val results: Map<String, List<Girl>> = emptyMap())
+
 data class Girl(val _id: String,
                 val createdAt: String,
                 val desc: String,

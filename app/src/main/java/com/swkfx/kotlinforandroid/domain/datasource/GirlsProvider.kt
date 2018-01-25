@@ -1,6 +1,7 @@
 package com.swkfx.kotlinforandroid.domain.datasource
 
 import com.swkfx.kotlinforandroid.data.db.GirlDao
+import com.swkfx.kotlinforandroid.data.server.GirlByDay
 import com.swkfx.kotlinforandroid.data.server.GirlsServer
 import com.swkfx.kotlinforandroid.domain.model.GirlListModel
 import com.swkfx.kotlinforandroid.extensions.firstResult
@@ -24,6 +25,15 @@ class GirlsProvider(val sources: List<DataSource> = GirlsProvider.SOURCES) {
     fun requestGirls(pageNumber: Int): GirlListModel = requestToSources {
         val requestGirls = it.requestGirls(pageNumber)
         if (requestGirls.size() > 0) requestGirls else null
+    }
+
+    fun requestGirlByDay(year: String, month: String, day: String): GirlByDay = requestToSources {
+        val requestGirlByDay = it.requestGirlByDay(year, month, day)
+        if (requestGirlByDay.category.isNotEmpty()) {
+            requestGirlByDay
+        } else {
+            null
+        }
     }
 
     private fun <T : Any> requestToSources(source: (DataSource) -> T?): T = sources.firstResult { source(it) }

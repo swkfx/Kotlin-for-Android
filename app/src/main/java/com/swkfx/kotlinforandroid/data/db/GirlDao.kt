@@ -1,5 +1,6 @@
 package com.swkfx.kotlinforandroid.data.db
 
+import com.swkfx.kotlinforandroid.data.server.GirlByDay
 import com.swkfx.kotlinforandroid.domain.datasource.DataSource
 import com.swkfx.kotlinforandroid.domain.model.GirlListModel
 import com.swkfx.kotlinforandroid.extensions.clear
@@ -18,6 +19,10 @@ import org.jetbrains.anko.db.select
  * </pre>
  */
 class GirlDao(private val dbHelper: DbHelper = DbHelper.instance, private val dbDataMapper: DbDataMapper = DbDataMapper()) : DataSource {
+    override fun requestGirlByDay(year: String, month: String, day: String): GirlByDay {
+        return GirlByDay(true, emptyList(), emptyMap())
+    }
+
     override fun requestGirls(pageNumber: Int): GirlListModel = requestGirlList(pageNumber)
 
     private fun requestGirlList(pageCount: Int) = dbHelper.use {
