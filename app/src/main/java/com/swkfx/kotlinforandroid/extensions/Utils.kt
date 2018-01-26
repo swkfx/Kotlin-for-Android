@@ -17,3 +17,11 @@ fun String.formatDate(): Date {
     val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S'Z'", Locale.getDefault())
     return dateFormat.parse(this)
 }
+
+fun Int.formatMonth(): String {
+    return if (this.toString().length == 1) {
+        "0" + this.toString()
+    } else {
+        toString()
+    }
+}

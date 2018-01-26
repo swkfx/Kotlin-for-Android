@@ -1,7 +1,9 @@
 package com.swkfx.kotlinforandroid.ui
 
 import android.app.Application
+import android.os.Environment
 import com.swkfx.kotlinforandroid.extensions.DelegatesExt
+import java.io.File
 
 /**
  * <pre>
@@ -21,6 +23,18 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+        copyDb()
+    }
+
+    private fun copyDb() {
+        val dbFile = File("data/data/com.swkfx.kotlinforandroid/databases/girl.db")
+        val copyFile = File(Environment.getExternalStorageDirectory().absolutePath + File.separator + "copyGirl.db")
+        if (dbFile.exists()) {
+            dbFile.copyTo(copyFile, true)
+            println("copy db success :${copyFile.absolutePath}")
+        } else {
+            println("db not exist")
+        }
 
     }
 }

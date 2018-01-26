@@ -28,4 +28,4 @@ data class Girl(val _id: String,
                 val type: String,
                 val url: String,
                 val used: Long,
-                val who: String)
+                val who: String?)

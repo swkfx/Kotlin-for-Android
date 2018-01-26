@@ -32,7 +32,7 @@ class GirlDb(var map: MutableMap<String, Any?>) {
                 type: String,
                 url: String,
                 used: Long,
-                who: String) : this(HashMap()) {
+                who: String?) : this(HashMap()) {
         this.girl_id = girl_id
         this.createAt = createAt
         this.desc = desc
@@ -41,7 +41,7 @@ class GirlDb(var map: MutableMap<String, Any?>) {
         this.type = type
         this.url = url
         this.used = used
-        this.who = who
+        this.who = who.orEmpty()
 
     }
 
