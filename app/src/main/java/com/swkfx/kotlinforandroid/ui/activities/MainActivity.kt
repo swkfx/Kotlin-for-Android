@@ -2,6 +2,7 @@ package com.swkfx.kotlinforandroid.ui.activities
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.Toolbar
 import com.swkfx.kotlinforandroid.R
 import com.swkfx.kotlinforandroid.domain.commands.RequestGirlListCommand
 import com.swkfx.kotlinforandroid.domain.model.Girl
@@ -9,21 +10,19 @@ import com.swkfx.kotlinforandroid.extensions.formatDate
 import com.swkfx.kotlinforandroid.ui.adapters.GirlAdapter
 import com.swkfx.kotlinforandroid.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.longToast
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.uiThread
+import org.jetbrains.anko.*
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(), ToolbarManager {
 
     private val items = listOf("meiziOne", "meiziTwo", "meiziThree")
-
+    override val toolbar by lazy { find<Toolbar>(R.id.toolbar) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initToolbar()
         setUpList()
-
-
+        attachToScroll(girlList)
+        toolbarTitle = "Gank-Girl"
     }
 
 

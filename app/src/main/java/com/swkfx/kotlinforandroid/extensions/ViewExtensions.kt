@@ -14,3 +14,11 @@ import android.view.View
 /* 为View增加扩展变量 context*/
 val View.ctx: Context
     get() = context
+
+fun View.slideExit() {
+    if (translationY == 0f) animate().translationY(-height.toFloat())
+}
+
+fun View.slideEnter() {
+    if (translationY < 0f) animate().translationY(0f)
+}
