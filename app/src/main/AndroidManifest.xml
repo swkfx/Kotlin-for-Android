@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
-
     <application
         android:name=".ui.App"
         android:allowBackup="true"
@@ -23,6 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activities.DetailActivity">
+        </activity>
+        <activity android:name=".ui.activities.SettingActivity">
         </activity>
     </application>
 

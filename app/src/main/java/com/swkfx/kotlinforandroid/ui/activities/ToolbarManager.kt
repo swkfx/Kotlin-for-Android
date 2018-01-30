@@ -9,6 +9,7 @@ import com.swkfx.kotlinforandroid.extensions.ctx
 import com.swkfx.kotlinforandroid.extensions.slideEnter
 import com.swkfx.kotlinforandroid.extensions.slideExit
 import com.swkfx.kotlinforandroid.ui.App
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 /**
@@ -33,7 +34,7 @@ interface ToolbarManager {
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.action_settings -> {
-                    App.instance.toast("action_settings click")
+                    toolbar.ctx.startActivity<SettingActivity>()
                 }
                 else -> {
                     App.instance.toast("Unknown option")
