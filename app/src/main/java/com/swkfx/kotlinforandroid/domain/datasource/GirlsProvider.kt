@@ -29,7 +29,7 @@ class GirlsProvider(val sources: List<DataSource> = GirlsProvider.SOURCES) {
 
     fun requestGirlByDay(year: String, month: String, day: String): GirlByDayModel = requestToSources {
         val requestGirlByDay = it.requestGirlByDay(year, month, day)
-        if (requestGirlByDay.category.isNotEmpty()) {
+        if (requestGirlByDay != null && requestGirlByDay.category.isNotEmpty()) {
             requestGirlByDay
         } else {
             null

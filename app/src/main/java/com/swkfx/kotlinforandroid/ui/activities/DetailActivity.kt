@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import com.swkfx.kotlinforandroid.R
 import com.swkfx.kotlinforandroid.domain.commands.RequestGirlByDayCommand
-import com.swkfx.kotlinforandroid.extensions.formatMonth
+import com.swkfx.kotlinforandroid.extensions.dataToString
 import kotlinx.android.synthetic.main.activity_detail.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.find
@@ -30,8 +30,8 @@ class DetailActivity : AppCompatActivity(), ToolbarManager {
         val calendar = Calendar.getInstance()
         calendar.time = date
         val year = calendar.get(Calendar.YEAR).toString()
-        val month = (calendar.get(Calendar.MONTH) + 1).formatMonth()
-        val day = calendar.get(Calendar.DAY_OF_MONTH).formatMonth()
+        val month = (calendar.get(Calendar.MONTH) + 1).dataToString()
+        val day = calendar.get(Calendar.DAY_OF_MONTH).dataToString()
         val dateStr = "$year/$month/$day"
         toolbarTitle = dateStr
         doAsync {

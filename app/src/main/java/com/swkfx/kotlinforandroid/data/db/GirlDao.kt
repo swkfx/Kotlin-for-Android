@@ -20,7 +20,7 @@ import org.jetbrains.anko.db.select
  * </pre>
  */
 class GirlDao(private val dbHelper: DbHelper = DbHelper.instance, private val dbDataMapper: DbDataMapper = DbDataMapper()) : DataSource {
-    override fun requestGirlByDay(year: String, month: String, day: String): GirlByDayModel = dbHelper.use {
+    override fun requestGirlByDay(year: String, month: String, day: String): GirlByDayModel? = dbHelper.use {
 
         //2018-01-16
         val sql = "${GirlsTable.PUBLISHED_AT} LIKE '$year-$month-$day%' AND ${GirlsTable.TYPE} IS NOT '福利'"

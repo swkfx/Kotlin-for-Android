@@ -1,6 +1,10 @@
 package com.swkfx.kotlinforandroid
 
+import com.swkfx.kotlinforandroid.extensions.dataToString
+import com.swkfx.kotlinforandroid.extensions.formatDate
+import org.junit.Assert
 import org.junit.Test
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -45,6 +49,38 @@ class KotlinTest {
         val parse = dateFormat.parse(timeStr)
         println("parseTime-->${parse.time}")
         println("date-->" + dateFormat.format(millis))
+
+    }
+
+
+    @Test
+    fun monthTest() {
+        for (month in 1..12) {
+            if (month.toString().length == 1) {
+                Assert.assertEquals("0" + month, month.dataToString())
+            } else {
+                Assert.assertEquals(month.toString(), month.dataToString())
+            }
+        }
+    }
+
+    @Test
+    fun testDateFormat() {
+        val data = "2018.01.30"
+
+        var formatDate = Date()
+        try {
+            formatDate = data.formatDate()
+        } catch (e: Exception) {
+            Assert.assertTrue(e is ParseException)
+        }
+        Assert.assertEquals("2018-01-30", formatDate.let {
+            val year = Calendar.getInstance().get(Calendar.YEAR)
+            val month = Calendar.getInstance().get(Calendar.MONTH) + 1
+            val day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+            "$year-${month.dataToString()}-${day.dataToString()}"
+        })
+
 
     }
 }

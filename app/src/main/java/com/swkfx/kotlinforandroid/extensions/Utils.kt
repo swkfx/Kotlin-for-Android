@@ -18,7 +18,7 @@ fun String.formatDate(): Date {
     return dateFormat.parse(this)
 }
 
-fun Int.formatMonth(): String {
+fun Int.dataToString(): String {
     return if (this.toString().length == 1) {
         "0" + this.toString()
     } else {

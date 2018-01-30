@@ -20,11 +20,10 @@ class ExampleInstrumentedTest : AnkoLogger {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("com.swkfx.kotlin_for_android", appContext.packageName)
+        assertEquals("com.swkfx.kotlinforandroid", appContext.packageName)
     }
 
     /*仅作展示,以后来看查看当初写的代码用.实际无法运行测试*/
-    @Test
     fun kotlinTest() {
 //        request()
 //        testMapEach()
